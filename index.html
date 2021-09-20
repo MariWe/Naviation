@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Pfeil Nav</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"> </script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>  
+    <script src="./script.js"></script>
+
+  </head> 
+  <body style='margin: 0; overflow: hidden;'>
+    
+    <a-scene 
+        id="szene"
+        vr-mode-ui='enabled: false' 
+        embedded
+        arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
+        <div id="demo" style="position: fixed; left: 40%; top: 5%; font-size: 1.25em; color: rgb(53, 50, 50); font-family: fantasy; z-index: 999999; background-color: rgba(255, 255, 255, 0.3); border-radius:5px;"></div>
+        <!--Pony-->
+      <a-gltf-model src="https://raw.githubusercontent.com/MariWe/ArRouting/main/assets/pony.glb"
+      gps-entity-place="latitude: 50.823451; longitude: 12.937632;"
+      scale="1 1 1"
+      id="pony"></a-gltf-model> 
+
+      <!--1. Wegpunkt-->
+      <a-gltf-model src="https://raw.githubusercontent.com/MariWe/ArRouting/main/assets/ring.glb"
+      gps-entity-place="latitude: 50.822218; longitude: 12.939607;"
+      scale="0.2 0.2 0.2"
+      id="one"></a-gltf-model>
+
+      <!--2. Wegpunkt-->
+      <a-gltf-model src="https://raw.githubusercontent.com/MariWe/ArRouting/main/assets/ring.glb"
+      gps-entity-place="latitude: 50.822577; longitude: 12.938716;"
+      scale="0.2 0.2 0.2"
+      id="two"></a-gltf-model>
+
+      <!--3. Wegpunkt-->
+      <a-gltf-model src="https://raw.githubusercontent.com/MariWe/ArRouting/main/assets/ring.glb"
+      gps-entity-place="latitude: 50.823061; longitude: 12.937573;"
+      scale="0.2 0.2 0.2"
+      id="three"></a-gltf-model>
+
+      <!--Camera + Arrow-->
+      <a-camera gps-camera=" minDistance: 1; maxDistance: 5;  gpsMinDistance: 5; gpsTimeInterval: 3;" rotation-reader>
+        <a-gltf-model id="pfeil"
+        src="https://raw.githubusercontent.com/MariWe/ArSkulpturen/main/assets/Unbenannt.glb"
+        scale="1 1 1"
+        position="0 0 -4 ">
+        </a-gltf-model>
+      </a-camera> 
+</a-scene>
+</body> 
+</html> 
