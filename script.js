@@ -9,6 +9,7 @@
 
     window.onload = () => {
 
+    //Intervall zur Pfeilausrichtung und Punktabfrage 
     getLocation();
     one = document.querySelector('#one');
     setInterval(function(){
@@ -18,6 +19,8 @@
             }, 5000); 
     }, 100)
 
+
+    //wenn Punkt erreicht... nächster Punkt 
        function Navigation(){
              if(chP1 == false && d < 5){
                 console.log("1");
@@ -50,14 +53,14 @@
 
                
      //Marker Positionen
-     lat2 = 50.822218;
-     lon2 = 12.939607;
-     p2Lat = 50.822577;
-     p2Lon = 12.938716;
-     p3Lat = 50.823061;
-     p3Lon = 12.937573;
-     zLat = 50.823451;
-     zLon = 12.937632;
+     lat2 = 50.82222544406333;
+     lon2 = 12.939606343958467;
+     p2Lat = 50.822572377030525;
+     p2Lon = 12.9387527304969;
+     p3Lat = 50.823041727894186;
+     p3Lon = 12.937640955314777;
+     zLat = 50.82344542519407;
+     zLon = 12.937797182674183;
 
     //Aktuelle Position
     function getLocation(){
