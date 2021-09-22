@@ -28,7 +28,8 @@
                 lat2 = p2Lat;
                 lon2 = p2Lon;
                 chP1 = true;
-                //document.getElementById("one").setAttribute('scale', '0, 0 ,0');
+                document.getElementById("one").setAttribute('scale', '0, 0 ,0');
+                d = number.Infinity;
                 }
                 if(chP2 == false && chP1 == true && d < 5){
                     console.log("2");
@@ -36,7 +37,8 @@
                     lat2 = p3Lat;
                     lon2 = p3Lon;
                     chP2 = true;
-                    //document.getElementById("two").setAttribute('scale', '0, 0 ,0');
+                    document.getElementById("two").setAttribute('scale', '0, 0 ,0');
+                    d = number.Infinity;
                 }
                 if(chP3 == false && chP1 == true && chP2 == true && d < 5){
                     console.log("3");
@@ -44,7 +46,8 @@
                     lat2 = zLat;
                     lon2 = zLon;
                     chP3 = true;
-                    //document.getElementById("three").setAttribute('scale', '0, 0 ,0');
+                    document.getElementById("three").setAttribute('scale', '0, 0 ,0');
+                    d = number.Infinity;
                 }
                 if(chP1 == true && chP2 == true && chP3 == true &&  zielP == false && d < 3){
                     console.log('4');
@@ -71,7 +74,6 @@
             Distanz();
         })}
         
-
     //Ausrichtung des Pfeils
     function Pointing(){
         var pfeil = document.querySelector('#pfeil');
@@ -96,5 +98,3 @@
     div.innerText = "Distanz bis zum nächsten Punkt: " + d.toFixed(2);
     }
 }
-    
-    
