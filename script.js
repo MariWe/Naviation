@@ -85,7 +85,7 @@ window.onload = () => {
                     sLat = 0;
                     sLon = 0;
                     lat1 = mLat;
-                    lon1 = mLon; console.log(lat1, lon1);
+                    lon1 = mLon; 
                     Navigation();
                     Pointing();
                     return lat1, lon1;
