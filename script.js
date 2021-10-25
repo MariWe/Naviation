@@ -1,15 +1,22 @@
-    let model, next, lat1, lat2, lon1, lon2, one, obj, d, lat, lon;
+let model, next, lat1, lat2, lon1, lon2, one, obj, d, lat, lon;
+let arrayLat = [];
+let arrayLon = [];
+let sLat = 0; 
+let sLon = 0;
+let mLat = 0;
+let mLon = 0;
 
 window.onload = () => {
+
     one = document.getElementById('one');
+    Mittelwert();
     //getLocation();
-    testLocation();
     createButton();
 
     let dest = document.getElementById('five').getAttribute('gps-entity-place');
     let zielLat = dest.latitude;
     let zielLon = dest.longitude;
-    
+
     //"Navigation"
     function Navigation() {
         next = document.getElementById(one.dataset.next);
@@ -29,13 +36,13 @@ window.onload = () => {
             }
         }
     }
-    
+
     function Display() {
         const div = document.querySelector('#demo');
-        div.innerText = "Zieldistanz: " + dis.toFixed(2) + "m";
+        div.innerText = "Distanz bis zum Ziel: " + dis.toFixed(2) + "m";
     }
 
-    function zielDistanz(lat1, lon1, zielLat, zielLon){
+    function zielDistanz(lat1, lon1, zielLat, zielLon) {
         const R = 6371e3; // metres
         const φ1 = lat1 * Math.PI / 180; // φ, λ in radians
         const φ2 = zielLat * Math.PI / 180;
@@ -52,7 +59,6 @@ window.onload = () => {
     //Aktuelle Position
     function getLocation() {
         navigator.geolocation.watchPosition(function (position) {
-            enableHighAccuracy: true;
             aktuell = position.coords;
             lat1 = aktuell.latitude;
             lon1 = aktuell.longitude;
@@ -61,46 +67,33 @@ window.onload = () => {
             return lat1, lon1;
         })
     }
- function testLocation() {
-        if(navigator.geolocation){
-        navigator.geolocation.watchPosition(zeigePosition, zeigeFehler, {
-            enableHighAccuracy: true,
-        });
-    }
-        else{
-            let newDiv = document.createElement("div");
-            newDiv.setAttribute("id", "test");
-            newDiv.innerHTML = "Ihr Browser unterstützt keine Geolocation";
+
+    function Mittelwert() {
+        for (let i = 0; i < 10; i++) {
+            navigator.geolocation.watchPosition(function (position) {
+                arrayLat.push(position.coords.latitude);
+                arrayLon.push(position.coords.longitude);
+                if (arrayLat.length == 10 && arrayLon.length == 10) {
+                    for (i = 0; i < 10; i++) {
+                        sLat = sLat + arrayLat[i];
+                        sLon = sLon + arrayLon[i];
+                    }
+                    mLat = sLat / 10;
+                    mLon = sLon / 10;
+                    arrayLat = [];
+                    arrayLon = [];
+                    sLat = 0;
+                    sLon = 0;
+                    lat1 = mLat;
+                    lon1 = mLon; console.log(lat1, lon1);
+                    Navigation();
+                    Pointing();
+                    return lat1, lon1;
+                }
+            })
         }
     }
 
-    function zeigePosition(position){
-        aktuell = position.coords;
-        lat1 = aktuell.latitude;
-        lon1 = aktuell.longitude;
-        Navigation();
-        Pointing();
-        console.log("Die aktuelle Position ist ", position.coords.latitude, position.coords.longitude);
-        return lat1, lon1;
-    }
-    
-        function zeigeFehler(error) {
-        switch(error.code) {
-            case error.PERMISSION_DENIED:
-                x.innerHTML = "Benutzer lehnte Standortabfrage ab."
-                break;
-            case error.POSITION_UNAVAILABLE:
-                x.innerHTML = "Standortdaten sind nicht verfügbar."
-                break;
-            case error.TIMEOUT:
-                x.innerHTML = "Die Standortabfrage dauerte zu lange (Time-out)."
-                break;
-            case error.UNKNOWN_ERROR:
-                x.innerHTML = "unbekannter Fehler."
-                break;
-        }
-    }
-    
     //Ausrichtung des Pfeils
     function Pointing() {
         var pfeil = document.querySelector('#pfeil');
@@ -109,7 +102,7 @@ window.onload = () => {
     }
 
     //Button zum Erzeugen des Objektes + Vergabe der Style-Elemente 
-    function createButton(){
+    function createButton() {
         let btn = document.createElement("button");
         btn.innerHTML = "Click Me!";
         document.body.appendChild(btn);
@@ -123,14 +116,14 @@ window.onload = () => {
         btn.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
         btn.style.fontFamily = "fantasy";
         btn.style.borderRadius = "5px";
-    
+
         btn.onclick = function () {
             createElement();
             setTimeout(function () {
                 update();
             }, 100);
         };
-        }
+    }
 
     function createElement() {
         model = document.createElement('a-box');
