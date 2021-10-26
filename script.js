@@ -69,7 +69,6 @@ window.onload = () => {
     }
 
     function Mittelwert() {
-        for (let i = 0; i < 10; i++) {
             navigator.geolocation.watchPosition(function (position) {
                 arrayLat.push(position.coords.latitude);
                 arrayLon.push(position.coords.longitude);
@@ -92,7 +91,6 @@ window.onload = () => {
                     return lat1, lon1;
                 }
             })
-        }
     }
 
     //Ausrichtung des Pfeils
