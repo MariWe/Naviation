@@ -96,7 +96,7 @@ window.onload = () => {
                 }
             })
     }
-    }
+    
 
     //Ausrichtung des Pfeils
     function Pointing() {
