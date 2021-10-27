@@ -68,28 +68,29 @@ window.onload = () => {
         })
     }
 
-       function Mittelwert() {
-        navigator.geolocation.watchPosition(function (position) {
+        function Mittelwert() {
+            navigator.geolocation.watchPosition(function (position) {
             arrayLat.push(position.coords.latitude);
             arrayLon.push(position.coords.longitude);
             console.log(arrayLat, arrayLon);
-            if (arrayLat.length == 10 && arrayLon.length == 10) {
-                for (i = 0; i < 10; i++) {
-                    sLat = sLat + arrayLat[i];
-                    sLon = sLon + arrayLon[i];
+            let sLat = 0;
+            let sLon = 0;
+            if (arrayLat.length <= 10 && arrayLon.length <= 10) {
+                for (let i = 0; i < arrayLat.length; i++) {
+                    sLat += arrayLat[i];
+                    sLon += arrayLon[i];
                 }
-                mLat = sLat / 10;
-                mLon = sLon / 10;
-                arrayLat = [];
-                arrayLon = [];
-                sLat = 0;
-                sLon = 0;
-                lat1 = mLat;
-                lon1 = mLon; Navigation();
+                lat1 = sLat / arrayLat.length;
+                lon1 = sLon / arrayLat.length;
+                Navigation();
                 Pointing();
                 return lat1, lon1;
             }
-        })
+            if (arrayLat.length === 10 && arrayLon.length === 10) {
+                arrayLat.shift();
+                arrayLon.shift();
+            }
+        });
     }
     
 
