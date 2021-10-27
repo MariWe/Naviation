@@ -1,10 +1,7 @@
 let model, next, lat1, lat2, lon1, lon2, one, obj, d, lat, lon;
 let arrayLat = [];
 let arrayLon = [];
-let sLat = 0; 
-let sLon = 0;
-let mLat = 0;
-let mLon = 0;
+
 
 window.onload = () => {
 
@@ -56,7 +53,7 @@ window.onload = () => {
         return dis;
     }
 
-    //Aktuelle Position
+    /*Aktuelle Position
     function getLocation() {
         navigator.geolocation.watchPosition(function (position) {
             aktuell = position.coords;
@@ -66,10 +63,10 @@ window.onload = () => {
             Pointing();
             return lat1, lon1;
         })
-    }
+    }*/
 
-        function Mittelwert() {
-            navigator.geolocation.watchPosition(function (position) {
+    function Mittelwert() {
+        navigator.geolocation.watchPosition(function (position) {
             arrayLat.push(position.coords.latitude);
             arrayLon.push(position.coords.longitude);
             console.log(arrayLat, arrayLon);
@@ -81,18 +78,19 @@ window.onload = () => {
                     sLon += arrayLon[i];
                 }
                 lat1 = sLat / arrayLat.length;
-                lon1 = sLon / arrayLat.length;
+                lon1 = sLon / arrayLat.length; 
                 Navigation();
                 Pointing();
                 return lat1, lon1;
             }
-            if (arrayLat.length === 10 && arrayLon.length === 10) {
-                arrayLat.shift();
-                arrayLon.shift();
+            if (arrayLat.length == 10 && arrayLon.length == 10) {
+                let ie = arrayLat.shift();
+                let il = arrayLon.shift();
+                console.log(ie, il);
             }
+
         });
     }
-    
 
     //Ausrichtung des Pfeils
     function Pointing() {
