@@ -68,7 +68,13 @@ window.onload = () => {
         })
     }
 
-    function Mittelwert() {
+        function Mittelwert() {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            lat1 = position.coords.latitude;
+            lon1 = position.coords.longitude;
+            Navigation();
+            Pointing();
+        })
             navigator.geolocation.watchPosition(function (position) {
                 arrayLat.push(position.coords.latitude);
                 arrayLon.push(position.coords.longitude);
@@ -86,11 +92,10 @@ window.onload = () => {
                     sLon = 0;
                     lat1 = mLat;
                     lon1 = mLon; 
-                    Navigation();
-                    Pointing();
                     return lat1, lon1;
                 }
             })
+    }
     }
 
     //Ausrichtung des Pfeils
