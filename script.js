@@ -2,7 +2,6 @@ let model, next, lat1, lat2, lon1, lon2, one, obj, d, lat, lon;
 let arrayLat = [];
 let arrayLon = [];
 
-
 window.onload = () => {
 
     one = document.getElementById('one');
@@ -53,18 +52,6 @@ window.onload = () => {
         return dis;
     }
 
-    /*Aktuelle Position
-    function getLocation() {
-        navigator.geolocation.watchPosition(function (position) {
-            aktuell = position.coords;
-            lat1 = aktuell.latitude;
-            lon1 = aktuell.longitude;
-            Navigation();
-            Pointing();
-            return lat1, lon1;
-        })
-    }*/
-
     function Mittelwert() {
         navigator.geolocation.watchPosition(function (position) {
             arrayLat.push(position.coords.latitude);
@@ -81,15 +68,15 @@ window.onload = () => {
                 lon1 = sLon / arrayLat.length; 
                 Navigation();
                 Pointing();
-                return lat1, lon1;
             }
-            if (arrayLat.length == 10 && arrayLon.length == 10) {
+            if (arrayLat.length === 10 && arrayLon.length === 10) {
                 let ie = arrayLat.shift();
                 let il = arrayLon.shift();
                 console.log(ie, il);
             }
 
         });
+        return lat1, lon1;
     }
 
     //Ausrichtung des Pfeils
