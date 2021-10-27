@@ -68,33 +68,28 @@ window.onload = () => {
         })
     }
 
-        function Mittelwert() {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            lat1 = position.coords.latitude;
-            lon1 = position.coords.longitude;
-            Navigation();
-            Pointing();
-        })
-            navigator.geolocation.watchPosition(function (position) {
-                arrayLat.push(position.coords.latitude);
-                arrayLon.push(position.coords.longitude);
-                console.log(arrayLat, arrayLon);
-                if (arrayLat.length == 10 && arrayLon.length == 10) {
-                    for (i = 0; i < 10; i++) {
-                        sLat = sLat + arrayLat[i];
-                        sLon = sLon + arrayLon[i];
-                    }
-                    mLat = sLat / 10;
-                    mLon = sLon / 10;
-                    arrayLat = [];
-                    arrayLon = [];
-                    sLat = 0;
-                    sLon = 0;
-                    lat1 = mLat;
-                    lon1 = mLon; 
-                    return lat1, lon1;
+       function Mittelwert() {
+        navigator.geolocation.watchPosition(function (position) {
+            arrayLat.push(position.coords.latitude);
+            arrayLon.push(position.coords.longitude);
+            console.log(arrayLat, arrayLon);
+            if (arrayLat.length == 10 && arrayLon.length == 10) {
+                for (i = 0; i < 10; i++) {
+                    sLat = sLat + arrayLat[i];
+                    sLon = sLon + arrayLon[i];
                 }
-            })
+                mLat = sLat / 10;
+                mLon = sLon / 10;
+                arrayLat = [];
+                arrayLon = [];
+                sLat = 0;
+                sLon = 0;
+                lat1 = mLat;
+                lon1 = mLon; Navigation();
+                Pointing();
+                return lat1, lon1;
+            }
+        })
     }
     
 
